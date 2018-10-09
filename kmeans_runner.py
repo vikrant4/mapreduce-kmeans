@@ -4,7 +4,9 @@ import subprocess
 import os
 import math
 import random
+import time
 
+start_time = time.time()
 STREAMING_JAR = '/usr/lib/hadoop-mapreduce/hadoop-streaming.jar'
 
 # Reading options
@@ -91,6 +93,7 @@ while True:
   else:
     subprocess.call(('hadoop fs -rm -r '+OUTPUT).split(' '))
 
-
+end_time = time.time()
 print('Processing complete, output final output can be found in '+option+'clusters.txt')
+print('Total time taken ' + str(start-end))
   
