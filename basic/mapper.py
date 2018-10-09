@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import math
 import sys
 
@@ -16,7 +17,7 @@ def get_clusters():
   # Now convert the data into clusters
   for line in cluster_data.strip().split('\n'):
     try:
-      cluster_id, latitude, longitude = line.split(',')
+      cluster_id, count, latitude, longitude = line.split(',')
       clusters.append((cluster_id, float(latitude), float(longitude)))
     except ValueError:
       continue
@@ -63,7 +64,7 @@ for line in sys.stdin:
   
   try:
     start_location = [float(row[5]), float(row[6])]
-    # end_location = [float(row[9]), float(row[10])]
+    end_location = [float(row[9]), float(row[10])]
   except ValueError:
     continue
   
@@ -75,5 +76,7 @@ for line in sys.stdin:
   
   # Find the nearest cluster for valid data
   nearest_cluster_id = get_nearest_cluster(start_location[0], start_location[1])
-  print(str(nearest_cluster_id) + ' ' + str(start_location[0]) + ' ' + str(start_location[1]))
+  print(str(nearest_cluster_id) + '\t' + str(start_location[0]) + ' ' + str(start_location[1]))
+  nearest_cluster_id = get_nearest_cluster(end_location[0], end_location[1])
+  print(str(nearest_cluster_id) + '\t' + str(end_location[0]) + ' ' + str(end_location[1]))
   # print(str(nearest_cluster_id) + ' ' + str(end_location[0]) + ' ' + str(end_location[1]))
